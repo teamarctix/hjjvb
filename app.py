@@ -9,27 +9,20 @@ app.register_blueprint(show_color_blueprint)
 app.register_blueprint(random_number_blueprint)
 
 # Add a route to display all registered routes as clickable links
-@app.route('/list_routes')
+@app.route('/')
 def list_routes():
     routes = []
     for rule in app.url_map.iter_rules():
         if rule.endpoint != 'static':  # Exclude static routes
-            route_info = {
-                'endpoint': rule.endpoint,
-                'methods': ','.join(rule.methods),
-                'path': rule.rule
-            }
-            # Generate clickable HTML links
-            route_info['link'] = f'<a href="{rule.rule}">{rule.rule}</a>'
-            routes.append(route_info)
+            routes.append(rule.rule)
     
-    # Create an HTML list of clickable links
-    links_html = '<ul>'
-    for route_info in routes:
-        links_html += f'<li>{route_info["link"]} - Methods: {route_info["methods"]}</li>'
-    links_html += '</ul>'
+    # Convert the routes to clickable links in HTML format
+    links = []
+    for route in routes:
+        link = f'<a href="{route}">{route}</a>'
+        links.append(link)
     
-    return links_html
+    return '<br>'.join(links)
 
 if __name__ == '__main__':
     app.run(debug=True)
