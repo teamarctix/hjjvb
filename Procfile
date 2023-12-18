@@ -1,5 +1,5 @@
-worker1: loop.py
-worker2: list.py
-worker3: mul.py
-worker4: print.py
-worker5: pt.py
+worker1: python loop.py
+worker2: python list.py
+worker3: python mul.py
+worker4: python print.py
+worker5: python pt.py
